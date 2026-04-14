@@ -117,6 +117,7 @@ SERVICE_HANDLERS = {
     "autoscaling": _lazy_handler("autoscaling"),
     "appconfig": _lazy_handler("appconfig"),
     "appconfigdata": _lazy_handler("appconfig"),
+    "scheduler": _lazy_handler("scheduler"),
 }
 
 SERVICE_NAME_ALIASES = {
@@ -599,6 +600,7 @@ async def _handle_lifespan(scope, receive, send):
                     "ses": "ses", "ses_v2": "ses_v2",
                     "servicediscovery": "servicediscovery", "s3files": "s3files",
                     "appconfig": "appconfig",
+                    "scheduler": "scheduler",
                 }
                 save_dict = {}
                 for key, mod_name in _state_map.items():
@@ -744,7 +746,7 @@ def _reset_all_state():
         "apigateway", "apigateway_v1", "firehose", "route53", "cognito", "ec2",
         "emr", "alb", "acm", "ses_v2", "waf", "efs", "cloudformation", "kms",
         "cloudfront", "codebuild", "ecr", "appsync", "servicediscovery",
-        "rds_data", "s3files", "appconfig", "iam_sts",
+        "rds_data", "s3files", "appconfig", "scheduler", "iam_sts",
     ]
     for mod_name in _ALL_SERVICE_MODULES:
         if mod_name in _loaded_modules:
