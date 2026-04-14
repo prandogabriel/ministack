@@ -5,9 +5,7 @@ All notable changes to MiniStack will be documented here.
 Format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 Versioning follows [Semantic Versioning](https://semver.org/).
 
----
-
-## [1.2.11] — 2026-04-14
+## [Unreleased] — 2026-04-14
 
 ### Added
 - **EventBridge Scheduler service** — full `scheduler` API: CreateSchedule, GetSchedule, UpdateSchedule, DeleteSchedule, ListSchedules, CreateScheduleGroup, GetScheduleGroup, DeleteScheduleGroup, ListScheduleGroups, TagResource, UntagResource, ListTagsForResource. Supports schedule groups, cascading deletes, name prefix/state filters, and `at()`/`cron()`/`rate()` expressions. 21 tests.
@@ -16,6 +14,15 @@ Versioning follows [Semantic Versioning](https://semver.org/).
 ### Improved
 - **Lazy service imports** — service modules are now loaded on first request instead of at startup. Idle RAM drops from ~59 MB to ~21 MB (64% reduction). Startup time drops from ~1.2s to ~0.5s (2.5x faster). Services that are never called consume zero memory.
 - **Removed pip from Docker image** — pip is no longer present in the final image (security hardening, reduced attack surface).
+
+
+---
+
+## [1.2.11] — 2026-04-14
+
+### Fixed
+- **RDS parameter group reset actions** — `ResetDBParameterGroup` and `ResetDBClusterParameterGroup` now clear either selected overrides or the full user-parameter state, matching AWS semantics. Parameter list parsing now accepts both `Parameters.member.N` and `Parameters.Parameter.N` serialization styles. Contributed by @jayjanssen (#298)
+- **RDS DbiResourceId lookup** — `DescribeDBInstances` and other instance actions now accept `DbiResourceId` (e.g. `db-1AD581BD3647411AACBF`) in addition to the friendly `DBInstanceIdentifier`. Fixes Terraform/OpenTofu state refresh failures. Contributed by @alexanderkrum-next (#305)
 
 ---
 
